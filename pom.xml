@@ -20,15 +20,35 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-				<version>3.2.0</version>
-			</plugin>
-			<plugin>
-				<groupId>org.mule.tools.maven</groupId>
-				<artifactId>mule-maven-plugin</artifactId>
-				<version>${mule.maven.plugin.version}</version>
-				<extensions>true</extensions>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-clean-plugin</artifactId>
+							<version>3.2.0</version>
+						</plugin>
+					<plugin>
+			  <groupId>org.mule.tools.maven</groupId>
+			  <artifactId>mule-maven-plugin</artifactId>
+			  <version>4.0.0</version>
+			  <extensions>true</extensions>
+			  <configuration>
+			    <cloudHubDeployment>
+			      <uri>https://anypoint.mulesoft.com</uri>
+			      <muleVersion>${app.runtime}</muleVersion>
+			      <username>mbskm007</username>
+			      <password>Shubh@1011</password>
+			      <connectedAppClientId>34ab134aac75409f9899866f75cbc873</connectedAppClientId>
+			      <connectedAppClientSecret>9292E3f762f04EcDb9D261Ec5AB2cB35</connectedAppClientSecret>
+			      <connectedAppGrantType>client_credentials</connectedAppGrantType>
+			      <applicationName>SKgodzilla</applicationName>
+			      <environment>Sandbox</environment>
+			      <region>us-east-1</region>
+			      <workers>1</workers>
+			      <workerType>MICRO</workerType>
+			      <properties>
+			        <k1>v1</k1>
+			        <k2>v2</k2>  
+			      </properties>
+			    </cloudHubDeployment>
+			  </configuration>
 			</plugin>
 		</plugins>
 	</build>
