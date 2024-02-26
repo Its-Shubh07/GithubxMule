@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="9c6056f3-6cb3-4472-92b1-4692a5eb3a47" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="496bd07a-f7a2-4af4-a7ff-ac9b384011ba" basePath="/v1" >
+		<http:request-connection host="api.lyrics.ovh" port="80" />
+	</http:request-config>
+	<flow name="lyricsexmFlow" doc:id="4983aed5-b37e-4f28-a471-1980abb5bbef" >
+		<http:listener doc:name="Listener" doc:id="f05ca227-56f1-410c-a7ce-ed7496d6efaf" config-ref="HTTP_Listener_config" path="/lyrics"/>
+		<http:request method="GET" doc:name="Request" doc:id="f75768aa-f233-4ab6-b4dc-1d6ccfe7ea73" path="/{art}/{name}" config-ref="HTTP_Request_configuration">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	art : attributes.queryParams.art,
+	name : attributes.queryParams.name
+}]]]></http:uri-params>
+		</http:request>
+	</flow>
+</mule>
